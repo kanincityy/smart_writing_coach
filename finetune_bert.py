@@ -34,8 +34,9 @@ train_labels = train_df['label'].tolist()
 val_texts = val_df['text'].tolist()
 val_labels = val_df['label'].tolist()
 labels = sorted(train_df['label'].unique())
-label2id = {label: i for i, label in enumerate(labels)}
-id2label = {i: label for label, i in label2id.items()}
+labels = sorted(train_df['label'].unique())
+label2id = {str(label): int(i) for i, label in enumerate(labels)}
+id2label = {int(i): str(label) for i, label in enumerate(labels)}
 
 train_dataset = Dataset.from_dict({'text': train_texts, 'label': train_labels})
 val_dataset = Dataset.from_dict({'text': val_texts, 'label': val_labels})
@@ -66,7 +67,7 @@ def compute_metrics(eval_pred):
 # Training arguments
 training_args = TrainingArguments(
     output_dir='./results',
-    evaluation_strategy='epoch',
+    eval_strategy='epoch',
     learning_rate=2e-5,
     per_device_train_batch_size=8,
     per_device_eval_batch_size=8,
@@ -110,4 +111,3 @@ test_dataset.set_format(type='torch', columns=['input_ids', 'attention_mask', 'l
 test_predictions = trainer.predict(test_dataset)
 preds = test_predictions.predictions.argmax(-1)
 labels = test_predictions.label_ids
-

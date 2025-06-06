@@ -4,10 +4,10 @@ import json
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-model_path = 'path/to/save/level_estimator_model'
-tokenizer_path = 'path/to/save/level_estimator_tokenizer'
-label2id_path = 'path/to/save/label2id.json'
-id2label_path = 'path/to/save/id2label.json'
+model_path = './models/level_estimator_model'
+tokenizer_path = './models/level_estimator_tokenizer'
+label2id_path = './models/label2id.json'
+id2label_path = './models/id2label.json'
 
 model = BertForSequenceClassification.from_pretrained(model_path)
 tokenizer = BertTokenizer.from_pretrained(tokenizer_path)
