@@ -145,3 +145,7 @@ Desktop.ini
 
 # Local configuration files
 *.local
+
+# OneDrive
+*.lnk
+/OneDrive/
