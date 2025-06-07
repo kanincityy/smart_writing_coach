@@ -47,6 +47,7 @@ The application follows a simple, powerful pipeline:
 git clone https://github.com/yourusername/smart_writing_coach.git
 cd smart_writing_coach
 ```
+2. Create and Activate the Virtual Environment
 
 ```bash
 # Create the virtual environment
@@ -132,4 +133,9 @@ The core quantitative scoring model used in this project, `KevSun/Engessay_gradi
 
 ---
 
-## Author
+### Author
+
+**Tatiana Limonova**  
+MSc Language Sciences (Technology of Language and Speech) – UCL  
+[GitHub Profile](https://github.com/kanincityy) • [LinkedIn](https://linkedin.com/in/tatianalimonova)  
+
