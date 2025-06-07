@@ -1,21 +1,27 @@
 import os
+import sys
 from openai import OpenAI
 
 class FeedbackGenerator:
     """
     A class to generate qualitative feedback for an essay using an LLM.
     """
-    def __init__(self):
+    def __init__(self, api_key: str):
         """
         Initialises the FeedbackGenerator by setting up the OpenAI client.
+
+        Args:
+            api_key (str): The OpenAI API key passed from the main script.
         """
+        if not api_key:
+            raise ValueError("An API key must be provided to the FeedbackGenerator.", file=sys.stderr)
+            
         try:
-            self.client = OpenAI()
-            # Test the connection to ensure the API key is valid
+            self.client = OpenAI(api_key=api_key)
+            # Test the connection to ensure the API key is valid.
             self.client.models.list() 
         except Exception as e:
-            print("Error: Could not initialize OpenAI client.")
-            print("Please ensure the OPENAI_API_KEY environment variable is set correctly.")
+            print(f"Error: Could not initialize OpenAI client. The API key may be invalid or expired: {e}")
             raise e
 
     def _construct_prompt(self, essay_text: str, rubric_scores: dict) -> list[dict]:
@@ -65,7 +71,7 @@ class FeedbackGenerator:
         """
         messages = self._construct_prompt(essay_text, rubric_scores)
         
-        print("Generating feedback with GPT-3.5 Turbo...")
+        print("Generating feedback with GPT-3.5 Turbo...", file=sys.stderr)
         try:
             response = self.client.chat.completions.create(
                 model="gpt-3.5-turbo",
@@ -74,5 +80,5 @@ class FeedbackGenerator:
             )
             return response.choices[0].message.content
         except Exception as e:
-            print(f"An error occurred while calling the OpenAI API: {e}")
+            print(f"An error occurred while calling the OpenAI API: {e}", file=sys.stderr)
             return "Error: Could not generate feedback."

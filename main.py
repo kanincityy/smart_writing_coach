@@ -1,4 +1,6 @@
 import json
+import os
+import sys
 from pathlib import Path
 from datetime import datetime
 from dotenv import load_dotenv
@@ -8,12 +10,26 @@ from generate_feedback import FeedbackGenerator
 # Define the output directory
 OUTPUT_DIR = Path("essay_feedback")
 
+# Load environment variables from .env file
+print("Loading environment variables...", file=sys.stderr)
+load_dotenv()
+
+# Get the OpenAI API key from environment variables
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+if not OPENAI_API_KEY:
+    print("Error: OPENAI_API_KEY not found. Make sure it's set in your .env file.", file=sys.stderr)
+    exit(1) # Exit the script if the key is missing
+else:
+    masked_key = OPENAI_API_KEY[:5] + "..." + OPENAI_API_KEY[-4:]
+    print(f"OpenAI API Key loaded (masked): {masked_key}", file=sys.stderr)
+
 def setup_modules():
     """Initialises and returns the grader and feedback generator modules."""
     print("Initialising modules... (This might take a moment)")
     try:
         grader = EssayGrader()
-        feedback_gen = FeedbackGenerator()
+        feedback_gen = FeedbackGenerator(api_key=OPENAI_API_KEY)
         print("Modules loaded successfully. Ready to begin.")
         return grader, feedback_gen
     except Exception as e:
@@ -77,7 +93,6 @@ def save_results(output_data: dict):
 
 def main():
     """Main function to orchestrate the entire process."""
-    load_dotenv()
     grader, feedback_gen = setup_modules()
     if not all([grader, feedback_gen]):
         return # Exit if modules failed to load

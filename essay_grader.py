@@ -1,4 +1,5 @@
 import torch
+import sys
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 class EssayGrader:
@@ -7,7 +8,7 @@ class EssayGrader:
     """
     def __init__(self, model_name: str = "KevSun/Engessay_grading_ML"):
         """
-        Initializes the EssayGrader by loading the model and tokenizer.
+        Initialises the EssayGrader by loading the model and tokenizer.
 
         Args:
             model_name (str): The name of the model on the Hugging Face Hub.
@@ -37,7 +38,7 @@ class EssayGrader:
             return_tensors='pt', 
             padding=True, 
             truncation=True, 
-            max_length=512 # Increased max_length for essays
+            max_length=512 
         )
 
         # Perform inference
@@ -45,13 +46,13 @@ class EssayGrader:
             outputs = self.model(**encoded_input)
 
         # Process the predictions
-        predictions = outputs.logits.squeeze().numpy()
+        predicted_scores = outputs.logits.squeeze().numpy()
         
-        # Scale predictions from 1 to 5, as per typical essay rubrics
-        scaled_scores = predictions
+        # Scale predictions from 1 to 10
+        scaled_scores = 2.25 * predicted_scores - 1.25
         
         # Round scores to the nearest 0.5
-        rounded_scores = [round(score * 2) / 2 for score in scaled_scores]
+        rounded_scores = [round(score * 2) / 2 for score in scaled_scores]  # Round to nearest 0.5
 
         # Create a dictionary of scores
         scores = {item: round(score, 1) for item, score in zip(self.item_names, rounded_scores)}
@@ -60,7 +61,7 @@ class EssayGrader:
 
 if __name__ == '__main__':
     # This block runs only when the script is executed directly
-    print("Initializing the essay grader...")
+    print("Initialising the essay grader...")
     grader = EssayGrader()
     print("Grader ready.")
 
@@ -83,7 +84,7 @@ if __name__ == '__main__':
         for item, score in predicted_scores.items():
             print(f"{item}: {score:.1f}")
 
-        # Optionally, save the scores to a file
+        # Save the scores to a file
         try:
             with open("predicted_scores.txt", "w") as f:
                 f.write("--- Predicted Scores ---\n")
