@@ -52,7 +52,7 @@ class EssayGrader:
         scaled_scores = 2.25 * predicted_scores - 1.25
         
         # Round scores to the nearest 0.5
-        rounded_scores = [round(score * 2) / 2 for score in scaled_scores]  # Round to nearest 0.5
+        rounded_scores = [round(score * 2) / 2 for score in scaled_scores] 
 
         # Create a dictionary of scores
         scores = {item: round(score, 1) for item, score in zip(self.item_names, rounded_scores)}

@@ -112,7 +112,7 @@ def main():
     if rubric_scores:
         print("\n### Your Quantitative Scores:\n")
         for item, score in rubric_scores.items():
-            print(f"- {item.capitalize()}: {score}/5.0")
+            print(f"- {item.capitalize()}: {score}/10.0")
     
     if qualitative_feedback:
         print("\n### Personalised Feedback:\n")

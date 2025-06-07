@@ -32,12 +32,12 @@ class FeedbackGenerator:
         Please provide feedback on the following essay based on its rubric scores.
 
         **Rubric Scores:**
-        - Cohesion: {rubric_scores.get('cohesion', 'N/A')}/5
-        - Syntax: {rubric_scores.get('syntax', 'N/A')}/5
-        - Vocabulary: {rubric_scores.get('vocabulary', 'N/A')}/5
-        - Phraseology: {rubric_scores.get('phraseology', 'N/A')}/5
-        - Grammar: {rubric_scores.get('grammar', 'N/A')}/5
-        - Conventions: {rubric_scores.get('conventions', 'N/A')}/5
+        - Cohesion: {rubric_scores.get('cohesion', 'N/A')}/10
+        - Syntax: {rubric_scores.get('syntax', 'N/A')}/10
+        - Vocabulary: {rubric_scores.get('vocabulary', 'N/A')}/10
+        - Phraseology: {rubric_scores.get('phraseology', 'N/A')}/10
+        - Grammar: {rubric_scores.get('grammar', 'N/A')}/10
+        - Conventions: {rubric_scores.get('conventions', 'N/A')}/10
 
         **Student's Essay:**
         ---
