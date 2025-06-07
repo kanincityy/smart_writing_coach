@@ -149,3 +149,7 @@ Desktop.ini
 # OneDrive
 *.lnk
 /OneDrive/
+
+# streamlit
+.streamlit/
+.streamlit/secrets.toml
