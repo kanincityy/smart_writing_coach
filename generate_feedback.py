@@ -21,7 +21,7 @@ class FeedbackGenerator:
             # Test the connection to ensure the API key is valid.
             self.client.models.list() 
         except Exception as e:
-            print(f"Error: Could not initialize OpenAI client. The API key may be invalid or expired: {e}", file=sys.stderr)
+            print(f"Error: Could not initialise OpenAI client. The API key may be invalid or expired: {e}", file=sys.stderr)
             raise e
 
     def _construct_prompt(self, essay_text: str, rubric_scores: dict) -> list[dict]:
