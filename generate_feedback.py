@@ -14,14 +14,14 @@ class FeedbackGenerator:
             api_key (str): The OpenAI API key passed from the main script.
         """
         if not api_key:
-            raise ValueError("An API key must be provided to the FeedbackGenerator.", file=sys.stderr)
+            raise ValueError("An API key must be provided to the FeedbackGenerator.")
             
         try:
             self.client = OpenAI(api_key=api_key)
             # Test the connection to ensure the API key is valid.
             self.client.models.list() 
         except Exception as e:
-            print(f"Error: Could not initialize OpenAI client. The API key may be invalid or expired: {e}")
+            print(f"Error: Could not initialize OpenAI client. The API key may be invalid or expired: {e}", file=sys.stderr)
             raise e
 
     def _construct_prompt(self, essay_text: str, rubric_scores: dict) -> list[dict]:

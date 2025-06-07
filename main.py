@@ -30,10 +30,11 @@ def setup_modules():
     try:
         grader = EssayGrader()
         feedback_gen = FeedbackGenerator(api_key=OPENAI_API_KEY)
-        print("Modules loaded successfully. Ready to begin.")
+        print("Modules loaded successfully. Ready to begin.", file=sys.stderr)
         return grader, feedback_gen
     except Exception as e:
-        print(f"Critical Error: Failed to initialise modules: {e}")
+        print(f"Critical Error: Failed to initialise modules: {e}", file=sys.stderr)
+        print("Please check your environment setup and try again.", file=sys.stderr)
         return None, None
 
 def get_user_input() -> str:
@@ -57,16 +58,18 @@ def get_user_input() -> str:
 
 def run_analysis(grader, feedback_gen, essay_text):
     """Runs the grading and feedback generation pipeline."""
-    print("\nGrading the essay with the local model...")
+    print("\nGrading the essay with the local model...", file=sys.stderr)
     rubric_scores = grader.predict_scores(essay_text)
     if not rubric_scores:
-        print("Warning: Could not generate rubric scores.")
+        print("Warning: Could not generate rubric scores.", file=sys.stderr)
+        print("Please ensure your essay is well-formed and try again.", file=sys.stderr)
         return None, None # Return None if scoring fails
 
     print("Generating personalised feedback with GPT-3.5 Turbo...")
     qualitative_feedback = feedback_gen.generate_feedback(essay_text, rubric_scores)
     if "Error:" in qualitative_feedback:
-        print("Warning: Could not generate qualitative feedback.")
+        print("Warning: Could not generate qualitative feedback.", file=sys.stderr)
+        print("Please check your essay and try again.", file=sys.stderr)
         return rubric_scores, None # Return scores but no feedback
 
     return rubric_scores, qualitative_feedback
@@ -82,14 +85,14 @@ def save_results(output_data: dict):
     file_path = OUTPUT_DIR / filename
 
     print("\n" + "="*50)
-    print(f"Saving results to: {file_path}")
+    print(f"Saving results to: {file_path}", file=sys.stderr)
     
     try:
         with open(file_path, "w", encoding="utf-8") as f:
             json.dump(output_data, f, indent=4)
-        print(f"Successfully saved the complete feedback.")
+        print(f"Successfully saved the complete feedback.", file=sys.stderr)
     except IOError as e:
-        print(f"Error: Could not save results to file: {e}")
+        print(f"Error: Could not save results to file: {e}", file=sys.stderr)
 
 def main():
     """Main function to orchestrate the entire process."""
@@ -99,15 +102,16 @@ def main():
 
     student_essay = get_user_input()
     if not student_essay.strip():
-        print("\nNo text was entered. Exiting program.")
+        print("\nNo text was entered. Exiting program.", file=sys.stderr)
+        print("Please try again with a valid essay.", file=sys.stderr)
         return
 
-    print("\nThank you! Processing your essay...")
+    print("\nThank you! Processing your essay...", file=sys.stderr)
     rubric_scores, qualitative_feedback = run_analysis(grader, feedback_gen, student_essay)
 
     # Display Final User Feedback
     print("\n" + "="*50)
-    print("Here is your complete feedback! 🎉")
+    print("Here is your complete feedback!")
     print("="*50)
     if rubric_scores:
         print("\n### Your Quantitative Scores:\n")
