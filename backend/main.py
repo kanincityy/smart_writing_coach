@@ -4,8 +4,8 @@ import sys
 from pathlib import Path
 from datetime import datetime
 from dotenv import load_dotenv
-from essay_grader import EssayGrader
-from generate_feedback import FeedbackGenerator
+from src.essay_grader import EssayGrader
+from src.generate_feedback import FeedbackGenerator
 
 # Define the output directory
 OUTPUT_DIR = Path("essay_feedback")
