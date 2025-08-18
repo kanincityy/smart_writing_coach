@@ -68,7 +68,7 @@ pip install -r requirements.txt
 4. Set Up Your Environment File
 Create a file named `.env` in the root of the project directory. Add your OpenAI API key to this file:
 ```bash
-.env OPENAI_API_KEY='sk-YourSecretApiKeyHere'
+.env OPENAI_API_KEY="YOUR_API_KEY_HERE"
 ```
 The `.gitignore` file is already configured to keep this file private.
 
