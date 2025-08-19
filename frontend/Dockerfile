@@ -2,14 +2,14 @@
 FROM python:3.11-slim
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /frontend
 
 # Copy and install requirements
-COPY ./requirements.txt /app/requirements.txt
-RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+COPY ./requirements.txt /frontend/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /frontend/requirements.txt
 
 # Copy the Streamlit app code
-COPY ./ /app/
+COPY ./ /frontend/
 
 # Tell Docker to expose the port Streamlit will run on
 EXPOSE 8501

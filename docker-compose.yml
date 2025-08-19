@@ -2,13 +2,13 @@ version: '3.8'
 
 services:
   backend:
-    build: ./src  # Tells Docker to build this service using the Dockerfile in the ./src directory
+    build: ./backend  # Tells Docker to build this service using the Dockerfile in the ./backend directory
     container_name: backend_service
     env_file:
       - ./.env    # Loads environment variables from the .env file
 
   frontend:
-    build: ./app  # Builds the service using the Dockerfile in the ./app directory
+    build: ./frontend  # Builds the service using the Dockerfile in the ./frontend directory
     container_name: frontend_service
     ports:
       - "8501:8501" # Maps port 8501 on your computer to port 8501 in the container
