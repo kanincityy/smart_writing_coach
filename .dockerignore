@@ -1,0 +1,12 @@
+# Ignore Git and Docker specific files
+.git
+.gitignore
+.dockerignore
+
+# Ignore the virtual environment and Python cache
+venv/
+__pycache__/
+
+# Ignore environment files to prevent secrets from being built into the image
+.env
+.streamlit/secrets.toml
