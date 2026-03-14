@@ -81,8 +81,6 @@ Paste your essay into the text box and click the "Get My Feedback Report" button
 
 ## Future Improvements
 
-[ ] Web Interface: Build a simple web front-end (using Flask or FastAPI) to provide a more user-friendly interface.
-
 [ ] Database Integration: Store user submissions and feedback in a database to track progress over time.
 
 [ ] Support for More Models: Allow users to choose between different LLMs for feedback generation.
