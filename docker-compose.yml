@@ -1,8 +1,6 @@
 services:
   backend:
-    build:
-      context: .                        
-      dockerfile: backend/Dockerfile    
+    build: ./backend  
     container_name: backend_service
     ports:
       - "8000:8000"
@@ -10,9 +8,7 @@ services:
       - ./.env
 
   frontend:
-    build:
-      context: .                        
-      dockerfile: frontend/Dockerfile   
+    build: ./frontend   
     container_name: frontend_service
     ports:
       - "8501:8501"

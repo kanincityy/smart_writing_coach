@@ -77,7 +77,7 @@ Once the containers are running, access the Smart Writing Coach in your web brow
 
 http://localhost:8501
 
-Paste your essay into the text box and click the "Get My Feedback Report" button to receive your analysis
+Paste your essay into the text box, select your teacher type, and click the "Get My Feedback Report" button to receive your analysis
 
 ---
 
@@ -88,6 +88,7 @@ Paste your essay into the text box and click the "Get My Feedback Report" button
 ---
 
 ## Contributing
+
 Contributions are welcome! Feel free to open issues or submit pull requests.
 
 ---
