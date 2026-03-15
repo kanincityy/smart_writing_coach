@@ -1,6 +1,7 @@
 # Use the same Python base image for consistency
 FROM python:3.13-slim
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+ENV UV_LINK_MODE=copy
 
 # Set the working directory
 WORKDIR /frontend

@@ -20,10 +20,9 @@ class EssayGrader:
         return response.json()
 
 class FeedbackGenerator:
-    def generate_feedback(self, text, scores):
+    def generate_feedback(self, text, scores, teacher): 
         response = requests.post(f"{BACKEND_URL}/generate_feedback", json={"essay_text": text, "scores": scores, "teacher": teacher})
         return response.json()["feedback"]
-
 
 # --------------------------------------------------------------------------
 # 2. UI Configuration & Styling
@@ -147,11 +146,8 @@ def create_radar_chart(scores):
 @st.cache_resource
 def load_models():
     """Loads all necessary models and classes into memory."""
-    print("INFO: Loading models and setting up classes...", file=sys.stderr)
-    openai_api_key = st.secrets["OPENAI_API_KEY"] 
-
     grader = EssayGrader()
-    feedback_gen = FeedbackGenerator(api_key=openai_api_key)
+    feedback_gen = FeedbackGenerator()
     return grader, feedback_gen
 
 
@@ -212,8 +208,6 @@ def main():
                     st.session_state.scores = grader.predict_scores(essay_text)
                     st.session_state.feedback = feedback_gen.generate_feedback(essay_text, st.session_state.scores, st.session_state.teacher)
                     st.session_state.results_generated = True
-        
-        # Add rain emoji feature
 
     with right_col:
         header_text = "Feedback Report" if st.session_state.results_generated else "Marking Criteria"
