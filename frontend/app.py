@@ -21,7 +21,7 @@ class EssayGrader:
 
 class FeedbackGenerator:
     def generate_feedback(self, text, scores):
-        response = requests.post(f"{BACKEND_URL}/generate_feedback", json={"essay_text": text, "scores": scores})
+        response = requests.post(f"{BACKEND_URL}/generate_feedback", json={"essay_text": text, "scores": scores, "teacher": teacher})
         return response.json()["feedback"]
 
 
@@ -189,13 +189,28 @@ def main():
         word_count = len(essay_text.strip().split()) if essay_text else 0
         st.markdown(f"<p style='text-align: right; color: #888;'>Word Count: {word_count}</p>", unsafe_allow_html=True)
         
+        teacher_type = st.select_slider(label="Strictness level", options=["Easy-going", "Direct, but kind", "Super strict!"])
+
+        kind_teacher = "You are a warm, approachable, and caring EFL teacher who focuses on uplifting students and presents criticism in an extremely gentle manner. Focusing on the improvements the student can make."
+        medium_teacher = "You are a balanced, insightful, and wise EFL teacher who gives honest, constructive feedback as well as encouragement. Your students deem you fair, acknowledging the wins of your students, while also pointing out areas of improvement."
+        strict_teacher = "You are a strict and experienced EFL teacher who gives blunt, exacting feedback and holds students to high standards. You focus mainly on areas of improvement and are extremely hard to impress. You know your student's capabilities, and you want them to do their best."
+
+        if teacher_type == "Easy-going":
+            teacher = kind_teacher
+        elif teacher_type == "Direct, but kind":
+            teacher = medium_teacher
+        else:
+            teacher = strict_teacher
+
+
         if st.button("Get My Feedback Report", use_container_width=True, type="primary"):
             if word_count == 0:
                 st.warning("Please enter some text before getting feedback.")
             else:
                 with st.spinner("Your coach is reading your essay..."):
+                    st.session_state.teacher = teacher
                     st.session_state.scores = grader.predict_scores(essay_text)
-                    st.session_state.feedback = feedback_gen.generate_feedback(essay_text, st.session_state.scores)
+                    st.session_state.feedback = feedback_gen.generate_feedback(essay_text, st.session_state.scores, st.session_state.teacher)
                     st.session_state.results_generated = True
         
         # Add rain emoji feature
