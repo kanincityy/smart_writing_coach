@@ -11,7 +11,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     uv sync --locked --no-install-project
 
-COPY ./frontend /frontend/  
+COPY . /frontend/  
 
 # Tell Docker to expose the port Streamlit will run on
 EXPOSE 8501

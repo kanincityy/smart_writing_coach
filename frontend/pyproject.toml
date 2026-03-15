@@ -1,0 +1,12 @@
+[project]
+name = "frontend"
+version = "0.1.0"
+description = "Frontend for smart_writing_coach"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "plotly>=6.6.0",
+    "requests>=2.32.5",
+    "streamlit>=1.55.0",
+    "streamlit-extras>=0.7.8",
+]
