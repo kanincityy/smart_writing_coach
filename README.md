@@ -21,6 +21,7 @@ The Smart Writing Coach operates as a multi-container application, separating th
 -   **Live Word Counter:** Provides immediate feedback on essay length as the user types.
 -   **Quantitative Analysis:** Generates scores across key writing dimensions (Cohesion, Syntax, Vocabulary, etc.) via a fine-tuned transformer model.
 -   **Visual Score Report:** Displays scores in an intuitive radar chart for a quick overview of strengths and weaknesses.
+-   **Distinct Teacher Personalities (NEW):** Select from three different teacher personalities dependng on how easy-going/strict you want the grading process to be!
 -   **Qualitative Feedback:** Leverages a Large Language Model (GPT-3.5 Turbo) to generate personalised, easy-to-understand feedback.
 -   **Dockerized:** The entire application is containerized with Docker, ensuring a consistent and easy setup process.
 
@@ -40,6 +41,7 @@ The Smart Writing Coach operates as a multi-container application, separating th
 
 #### Orchestration
 -   **Containerization:** Docker & Docker Compose
+-   **Dependency Management:** uv
 
 ---
 
@@ -63,7 +65,7 @@ The .gitignore file is already configured to keep this file private.
 **3. Build and Run the Application**
 Use Docker Compose to build the images and start the services.
 ```bash
-docker-compose up --build
+docker-compose up -d --build
 ```
 This command will start both the backend API and the frontend Streamlit app. It may take some time on the first run.
 
@@ -82,8 +84,6 @@ Paste your essay into the text box and click the "Get My Feedback Report" button
 ## Future Improvements
 
 [ ] Database Integration: Store user submissions and feedback in a database to track progress over time.
-
-[ ] Support for More Models: Allow users to choose between different LLMs for feedback generation.
 
 ---
 

@@ -1,19 +1,22 @@
-version: '3.8'
-
 services:
   backend:
-    build: ./backend  # Tells Docker to build this service using the Dockerfile in the ./backend directory
+    build:
+      context: .                        
+      dockerfile: backend/Dockerfile    
     container_name: backend_service
+    ports:
+      - "8000:8000"
     env_file:
-      - ./.env    # Loads environment variables from the .env file
+      - ./.env
 
   frontend:
-    build: ./frontend  # Builds the service using the Dockerfile in the ./frontend directory
+    build:
+      context: .                        
+      dockerfile: frontend/Dockerfile   
     container_name: frontend_service
     ports:
-      - "8501:8501" # Maps port 8501 on your computer to port 8501 in the container
+      - "8501:8501"
     depends_on:
-      - backend     # Tells the frontend to wait for the backend to start first
+      - backend
     environment:
-      # This is the magic! The frontend can now find the backend at the URL "http://backend:8000"
       - BACKEND_URL=http://backend:8000

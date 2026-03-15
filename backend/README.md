@@ -32,7 +32,8 @@ This service exposes the following endpoints:
     ```json
     {
       "essay_text": "Your essay text...",
-      "scores": { "Cohesion": 4.5, "Syntax": 4.0, ... }
+      "scores": { "Cohesion": 4.5, "Syntax": 4.0, ... },
+      "teacher_type": "You can now choose between 3 teacher personalities via the frontend!"
     }
     ```
 -   **Success Response (200):**
@@ -49,30 +50,20 @@ This service exposes the following endpoints:
 -   **Server:** Uvicorn
 -   **ML/AI:** PyTorch, Hugging Face Transformers
 -   **LLM Integration:** OpenAI API
+-   **Containerisation** Docker
+-   **Dependency Management** uv (saved my life honestly)
 
 ---
 
-## Running Standalone (for Development)
+## Running the Service
 
-While this service is designed to be run with Docker Compose, you can run it as a standalone API for development.
+This service is designed to be run via Docker Compose from the project root:
 
-1.  **Navigate to this directory:**
-    ```bash
-    cd src
-    ```
-2.  **Create and activate a virtual environment:**
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # Or .\venv\Scripts\Activate.ps1 on Windows
-    ```
-3.  **Install dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-4.  **Set up your `.env` file** in the project's root directory.
+1. **Build and start all services:**
+```bash
+    docker-compose up --build
+```
 
-5.  **Run the Uvicorn server:**
-    ```bash
-    uvicorn main:app --reload
-    ```
-The API will be available at `http://127.0.0.1:8000`.
+2. **Set up your `.env` file** in the project root before running.
+
+The API will be available at `http://localhost:8000`.
