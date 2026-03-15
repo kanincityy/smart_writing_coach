@@ -1,5 +1,4 @@
-.gitignore
-.streamlit/secrets.toml
+# backend/.dockerignore
 __pycache__
 .venv
 *.pyc
