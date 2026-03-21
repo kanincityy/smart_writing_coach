@@ -191,13 +191,13 @@ def main():
         medium_teacher = "You are a balanced, insightful, and wise EFL teacher who gives honest, constructive feedback as well as encouragement. Your students deem you fair, acknowledging the wins of your students, while also pointing out areas of improvement."
         strict_teacher = "You are a strict and experienced EFL teacher who gives blunt, exacting feedback and holds students to high standards. You focus mainly on areas of improvement and are extremely hard to impress. You know your student's capabilities, and you want them to do their best."
 
-        if teacher_type == "Easy-going":
-            teacher = kind_teacher
-        elif teacher_type == "Direct, but kind":
-            teacher = medium_teacher
-        else:
-            teacher = strict_teacher
-
+        match teacher_type:
+            case "Easy-going":
+                teacher = kind_teacher
+            case "Direct, but kind":
+                teacher = medium_teacher
+            case _:
+                teacher = strict_teacher
 
         if st.button("Get My Feedback Report", use_container_width=True, type="primary"):
             if word_count == 0:
@@ -235,7 +235,6 @@ def main():
                 st.markdown(st.session_state.feedback, unsafe_allow_html=True)
 
             st.balloons()
-        
         else:
             st.image(get_placeholder_svg(), use_container_width=True)
 
