@@ -8,7 +8,7 @@ An AI-powered web application that provides detailed, rubric-based feedback on E
 
 The Smart Writing Coach operates as a multi-container application, separating the user interface from the heavy machine learning logic for scalability and maintainability.
 
-`[ User ] <--> [ Frontend (Streamlit on Port 8501) ] <--> [ Backend (FastAPI API on Port 8000) ] <--> [ OpenAI API ]`
+`[ User ] <--> [ Frontend (Streamlit on Port 8501) ] <--> [ Backend (Gemini API on Port 8000) ] <--> [ Gemini API ]`
 
 -   **Frontend:** A user-friendly web interface built with Streamlit.
 -   **Backend:** A powerful Python API built with FastAPI that handles the AI/ML model inference and feedback generation.
@@ -22,7 +22,7 @@ The Smart Writing Coach operates as a multi-container application, separating th
 -   **Quantitative Analysis:** Generates scores across key writing dimensions (Cohesion, Syntax, Vocabulary, etc.) via a fine-tuned transformer model.
 -   **Visual Score Report:** Displays scores in an intuitive radar chart for a quick overview of strengths and weaknesses.
 -   **Distinct Teacher Personalities (NEW):** Select from three different teacher personalities dependng on how easy-going/strict you want the grading process to be!
--   **Qualitative Feedback:** Leverages a Large Language Model (GPT-3.5 Turbo) to generate personalised, easy-to-understand feedback.
+-   **Qualitative Feedback:** Leverages a Large Language Model (Gemini-3-Flash) to generate personalised, easy-to-understand feedback.
 -   **Dockerized:** The entire application is containerized with Docker, ensuring a consistent and easy setup process.
 
 ---
@@ -58,7 +58,7 @@ cd smart_writing_coach
 **2. Set Up Your Environment File**
 For local development, create a file named .env in the root of the project directory. Add your OpenAI API key to this file, replacing the placeholder text with your actual key:
 ```bash
-OPENAI_API_KEY="YOUR_API_KEY_HERE"
+GEMINI_API_KEY="YOUR_API_KEY_HERE"
 The .gitignore file is already configured to keep this file private.
 ```
 
