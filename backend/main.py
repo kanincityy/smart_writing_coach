@@ -8,14 +8,14 @@ from generate_feedback import FeedbackGenerator
 
 load_dotenv()
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-if not OPENAI_API_KEY:
-    print("Error: OPENAI_API_KEY not found.", file=sys.stderr)
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+if not GEMINI_API_KEY:
+    print("Error: GEMINI_API_KEY not found.", file=sys.stderr)
     exit(1)
 
 app = FastAPI()  
 grader = EssayGrader()
-feedback_gen = FeedbackGenerator(api_key=OPENAI_API_KEY)
+feedback_gen = FeedbackGenerator(api_key=GEMINI_API_KEY)
 
 class PredictRequest(BaseModel):
     essay_text: str
